@@ -1,16 +1,27 @@
+import { jsPDF } from "./jsPDF/jspdf.module.js";
+
 document.addEventListener("DOMContentLoaded", function() {
-    var filetype = "txt";
+    var filetype = "pdf";
     var button = document.getElementById("export");
+    const doc = new jsPDF();
 
     button.addEventListener("click", (event) => main());
 
     function main() {
+        console.log("Exporting as " + filetype);
         if(filetype === "pdf") {
             genPdf();
         }
         else if(filetype === "txt") {
             genTxt();
         }
+    }
+
+    function genPdf() {
+        var content = document.getElementById("input").value;
+        doc.text(content, 10, 10);
+        doc.save("download.pdf");
+        console.log("PDF generated");
     }
 
     function genTxt() {
@@ -24,5 +35,6 @@ document.addEventListener("DOMContentLoaded", function() {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
+        console.log("TXT generated");
     }
 });
