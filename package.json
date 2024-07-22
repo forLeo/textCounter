@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "jspdf": "^2.5.1"
+  },
+  "name": "textcounter",
+  "version": "1.0.0",
+  "description": "This page counts the words and characters of an uploaded text.",
+  "main": "export.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}

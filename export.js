@@ -1,4 +1,4 @@
-import { jsPDF } from "./jsPDF/jspdf.module.js";
+import { jsPDF } from "jspdf";
 
 document.addEventListener("DOMContentLoaded", function() {
     var filetype = "pdf";
@@ -19,7 +19,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function genPdf() {
         var content = document.getElementById("input").value;
-        doc.text(content, 10, 10);
+        var maxWidth = 180;
+        var lineHeight = 10;
+        var xPosition = 10;
+        var yPosition = 10;
+        var pageHeight = 280;
+    
+        doc.setFont("helvetica");
+        doc.setFontSize(12);
+    
+        var lines = doc.splitTextToSize(content, maxWidth);
+    
+        lines.forEach(function(line) {
+            if (yPosition > pageHeight) {
+                doc.addPage();
+                yPosition = 10;
+            }
+            doc.text(line, xPosition, yPosition);
+            yPosition += lineHeight;
+        });
+    
         doc.save("download.pdf");
         console.log("PDF generated");
     }
