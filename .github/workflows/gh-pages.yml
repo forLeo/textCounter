@@ -8,6 +8,18 @@ jobs:
   copy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Check for dist folder
+        run: |
+          if [ ! -d dist ]; then
+            echo "dist folder not found"
+            exit 1
+          fi
+
       - name: Checkout deployment branch
         uses: actions/checkout@v2
         with:
@@ -20,7 +32,7 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -r ${{ github.workspace }}/dist/* .
+          cp -r dist/* .
           git add .
           git diff-index --quiet HEAD || git commit -am "Copy files to deployment branch"
           git push origin gh-pages
