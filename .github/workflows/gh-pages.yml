@@ -20,7 +20,7 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -r dist/* .
+          cp -r ${{ github.workspace }}/dist/* .
           git add .
           git diff-index --quiet HEAD || git commit -am "Copy files to deployment branch"
           git push origin gh-pages
