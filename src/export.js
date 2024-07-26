@@ -1,8 +1,10 @@
 import { jsPDF } from "jspdf";
 
 document.addEventListener("DOMContentLoaded", function() {
-    var filetype = "pdf";
     var button = document.getElementById("export");
+    var select = document.getElementById("select");
+
+    var filetype = select.value;
 
     button.addEventListener("click", (event) => main());
 
