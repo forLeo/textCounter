@@ -4,11 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("export");
     var select = document.getElementById("select");
 
-    var filetype = select.value;
-
     button.addEventListener("click", (event) => main());
 
     function main() {
+        var filetype = select.value;
         console.log("Exporting as " + filetype);
         if(filetype === "pdf") {
             genPdf();
