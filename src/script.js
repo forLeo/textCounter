@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     var characters = document.getElementById("characters");
     var clear = document.getElementById("clear");
 
-    textArea.addEventListener("input", (event) => main());
+    textArea.addEventListener("input", (event) => {
+        main()
+    });
+
     clear.addEventListener("click", (event) => {
         textArea.value = "";
         main();
@@ -22,5 +25,6 @@ document.addEventListener("DOMContentLoaded", function() {
         var text = textArea.value;
         words.textContent = "words: " + countWords(text);
         characters.textContent = "characters: " + countCharacters(text);
+        console.log(textArea.value);
     }
 });
