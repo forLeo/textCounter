@@ -3,7 +3,6 @@ import { jsPDF } from "jspdf";
 document.addEventListener("DOMContentLoaded", function() {
     var filetype = "pdf";
     var button = document.getElementById("export");
-    const doc = new jsPDF();
 
     button.addEventListener("click", (event) => main());
 
@@ -18,42 +17,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function genPdf() {
+        const doc = new jsPDF();
         var content = document.getElementById("input").value;
         var maxWidth = 180;
         var lineHeight = 10;
         var xPosition = 10;
         var yPosition = 10;
         var pageHeight = 280;
-    
-        doc.setFont("helvetica");
-        doc.setFontSize(12);
-    
-        var lines = doc.splitTextToSize(content, maxWidth);
-    
-        lines.forEach(function(line) {
-            if (yPosition > pageHeight) {
-                doc.addPage();
-                yPosition = 10;
-            }
-            doc.text(line, xPosition, yPosition);
-            yPosition += lineHeight;
-        });
-    
-        doc.save("download.pdf");
-        console.log("PDF generated");
+
+        doc.text(content, xPosition, yPosition, { maxWidth: maxWidth });
+
+        doc.save("document.pdf");
     }
 
     function genTxt() {
         var content = document.getElementById("input").value;
-        var txtBlob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        var url = URL.createObjectURL(txtBlob);
+        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
         var link = document.createElement("a");
-        link.href = url;
-        link.download = "download.txt";
-        document.body.appendChild(link);
+        link.href = URL.createObjectURL(blob);
+        link.download = "document.txt";
         link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        console.log("TXT generated");
     }
 });
