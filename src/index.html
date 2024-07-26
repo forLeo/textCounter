@@ -18,10 +18,12 @@
         </tr>
     </table>
     <button id="clear">clear</button>
-    <select multiple id="select">
-        <option value="txt">txt</option>
-        <option value="pdf">pdf</option>
-    </select>
+    <div class="radio-container">
+        <input type="radio" id="txt" name="format" value="txt">
+        <label for="txt">txt</label>
+        <input type="radio" id="pdf" name="format" value="pdf">
+        <label for="pdf">pdf</label>
+    </div>
     <button id="export">export</button>
 </body>
 </html>

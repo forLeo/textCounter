@@ -28,3 +28,28 @@ button {
     margin-right: auto;
     margin-top: 1vmax;
 }
+
+.radio-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.radio-container input[type="radio"] {
+    display: none;
+}
+
+.radio-container label {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.radio-container input[type="radio"]:checked + label {
+    background-color: #Ffa500;
+}

@@ -2,12 +2,11 @@ import { jsPDF } from "jspdf";
 
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("export");
-    var select = document.getElementById("select");
 
     button.addEventListener("click", (event) => main());
 
     function main() {
-        var filetype = select.value;
+        var filetype = document.querySelector('input[name="format"]:checked').value;
         console.log("Exporting as " + filetype);
         if(filetype === "pdf") {
             genPdf();
