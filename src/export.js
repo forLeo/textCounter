@@ -23,9 +23,18 @@ document.addEventListener("DOMContentLoaded", function() {
         var lineHeight = 10;
         var xPosition = 10;
         var yPosition = 10;
-        var pageHeight = 280;
+        var pageHeight = doc.internal.pageSize.height;
 
-        doc.text(content, xPosition, yPosition, { maxWidth: maxWidth });
+        var lines = doc.splitTextToSize(content, maxWidth);
+
+        lines.forEach((line, index) => {
+            if (yPosition + lineHeight > pageHeight) {
+                doc.addPage();
+                yPosition = 10; // Reset yPosition for the new page
+            }
+            doc.text(line, xPosition, yPosition);
+            yPosition += lineHeight;
+        });
 
         doc.save("document.pdf");
     }
