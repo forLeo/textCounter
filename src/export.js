@@ -1,50 +1,50 @@
-import { jsPDF } from "jspdf";
+document.addEventListener("DOMContentLoaded", () => {
+    const exportBtn = document.getElementById("export");
+    
+    exportBtn.addEventListener("click", () => {
+        const textArea = document.getElementById("input");
+        const content = textArea.value.trim();
+        const format = document.getElementById("format").value;
 
-document.addEventListener("DOMContentLoaded", function() {
-    var button = document.getElementById("export");
+        if (!content) return alert("Text area is empty!");
 
-    button.addEventListener("click", (event) => main());
-
-    function main() {
-        var filetype = document.querySelector('input[name="format"]:checked').value;
-        console.log("Exporting as " + filetype);
-        if(filetype === "pdf") {
-            genPdf();
+        if (format === "pdf") {
+            genPdf(content);
+        } else {
+            genTxt(content);
         }
-        else if(filetype === "txt") {
-            genTxt();
-        }
-    }
+    });
 
-    function genPdf() {
+    function genPdf(content) {
+        const { jsPDF } = window.jspdf; 
         const doc = new jsPDF();
-        var content = document.getElementById("input").value;
-        var maxWidth = 180;
-        var lineHeight = 10;
-        var xPosition = 10;
-        var yPosition = 10;
-        var pageHeight = doc.internal.pageSize.height;
-
-        var lines = doc.splitTextToSize(content, maxWidth);
-
-        lines.forEach((line, index) => {
-            if (yPosition + lineHeight > pageHeight) {
+        
+        const margin = 15;
+        const pageHeight = doc.internal.pageSize.height;
+        const maxWidth = doc.internal.pageSize.width - (margin * 2);
+        const lineHeight = 7; 
+        const lines = doc.splitTextToSize(content, maxWidth);
+        
+        let cursorY = margin;
+        lines.forEach(line => {
+            if (cursorY + lineHeight > pageHeight - margin) {
                 doc.addPage();
-                yPosition = 10; // Reset yPosition for the new page
+                cursorY = margin;
             }
-            doc.text(line, xPosition, yPosition);
-            yPosition += lineHeight;
+            
+            doc.text(line, margin, cursorY);
+            cursorY += lineHeight;
         });
-
         doc.save("document.pdf");
     }
 
-    function genTxt() {
-        var content = document.getElementById("input").value;
-        var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-        var link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "document.txt";
-        link.click();
+    function genTxt(content) {
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "document.txt";
+        a.click();
+        URL.revokeObjectURL(url);
     }
 });

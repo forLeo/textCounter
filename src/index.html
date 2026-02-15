@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>text Counter</title>
+    <title>Text Counter</title>
     <link rel="stylesheet" href="./style.css">
-    <script type="text/javascript" src="./script.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script type="text/javascript" src="./script.js" defer></script>
     <script type="module" src="./export.js"></script>
 </head>
-<body>
-    <h1>text Counter</h1>
-    <textarea name="input" id="input" placeholder="Input your Text here!"></textarea>
-    <table>
-        <tr>
-            <td id="words">words: 0</th>
-            <td id="characters">characters: 0</th>
-        </tr>
-    </table>
-    <button id="clear">clear</button>
-    <div class="radio-container">
-        <input type="radio" id="txt" name="format" value="txt">
-        <label for="txt">txt</label>
-        <input type="radio" id="pdf" name="format" value="pdf">
-        <label for="pdf">pdf</label>
-    </div>
-    <button id="export">export</button>
+<body class="mouseIsMoving">
+    <header class="title">
+        <h1>text counter</h1>
+    </header>
+
+    <main id="app">
+        <textarea name="input" id="input" placeholder="Input your text here..."></textarea>
+        
+        <div class="stats-container">
+            <span id="words">words: 0</span>
+            <span id="characters">characters: 0</span>
+        </div>
+
+        <div class="controls">
+            <button id="clear">clear</button>
+            
+            <div class="export-group">
+                <select id="format" aria-label="Export Format">
+                    <option value="txt">.txt</option>
+                    <option value="pdf">.pdf</option>
+                </select>
+                <button id="export">export</button>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p onclick="location.href='https://github.com/forLeo';">made by forLeo</p>
+    </footer>
+
 </body>
 </html>

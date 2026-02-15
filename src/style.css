@@ -1,55 +1,123 @@
-h1 {
-    font-size: 5vmax;
-    font-family: 'Courier New', Courier, monospace;
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --border-color: #000000;
+    --hover-bg: #f0f0f0;
+    --font-main: Georgia, 'Times New Roman', Times, serif;
+}
+
+body.darkMode {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+    --hover-bg: #2a2a2a;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#app {
+    width: 90%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.title {
+    margin: 40px 0;
     text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 300;
+    text-transform: lowercase;
 }
 
 textarea {
-    padding-top: 0.3vmax;
-    padding-left: 0.5vmax;
-    width: 50vmax;
-    height: 20vmax;
-    display: block;
-    margin: auto;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 100%;
+    height: 250px;
+    padding: 1.5em;
+    background-color: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 16px;
+    border: 0.1em solid var(--border-color);
+    border-radius: 4px;
+    resize: none;
+    box-sizing: border-box;
+    outline: none;
 }
 
-table {
-    width: 50vmax;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    table-layout: fixed;
-}
-
-button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1vmax;
-}
-
-.radio-container {
+.stats-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 0.1em solid var(--border-color);
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
 }
 
-.radio-container input[type="radio"] {
-    display: none;
+.export-group {
+    display: flex;
+    border: 0.1em solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
-.radio-container label {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 20px;
-    background-color: #333;
-    color: #fff;
+/* 6. Buttons & Inputs */
+button, select {
+    padding: 0.6em 1.2em;
+    background: transparent;
+    color: inherit;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
     cursor: pointer;
-    text-align: center;
+    text-transform: lowercase;
+    transition: background 0.2s;
 }
 
-.radio-container input[type="radio"]:checked + label {
-    background-color: #Ffa500;
+#clear {
+    border: 0.1em solid var(--border-color);
+    border-radius: 4px;
+}
+
+#export {
+    border-left: 0.1em solid var(--border-color);
+}
+
+button:hover {
+    background-color: var(--hover-bg);
+}
+
+select {
+    outline: none;
+    appearance: none;
+    padding-right: 1em;
+}
+
+.footer {
+    margin-top: auto;
+    padding: 20px 0;
+    font-weight: 300;
+    font-size: 16px;
+    cursor: pointer;
+    text-transform: lowercase;
 }

@@ -25,6 +25,5 @@ document.addEventListener("DOMContentLoaded", function() {
         var text = textArea.value;
         words.textContent = "words: " + countWords(text);
         characters.textContent = "characters: " + countCharacters(text);
-        console.log(textArea.value);
     }
 });
